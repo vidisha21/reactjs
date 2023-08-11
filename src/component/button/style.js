@@ -5,13 +5,13 @@ const Wrapper = styled.button`
   padding: 5px 10px;
   font-size: 16px;
   background-color: teal;
-  color: blue;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: grey;
   }
 `;
 
