@@ -1,29 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useState } from 'react';
 import ScoreCard from './component/scoreCard';
 import Button from './component/button';
-// import {  AppWrapper } from '.';
+import { ScoreButtons, Wrapper } from './style';
 
-
-const ScoreButtons = styled.div`{
-  display: flex;
-  justify-content: center;
-  height: 45px;
-  Button{
-    width: 80px;
-  }
-}
-`;
-
-const AppWrapper = styled.div`
-display: flex;
-flex-direction: column;
-width: 30%;
-height:80%;
-margin: auto;
-background : url('https://img.freepik.com/premium-photo/soccer-stadium-evening-arena-with-crowd-fans-d-illustration_336913-373.jpg?size=626&ext=jpg&ga=GA1.1.1522961941.1691787232&semt=ais');
-background-repeat: no-repeat;
-`;
 
 const App = () => {
   const [totalScore, setTotalScore] = useState(0);
@@ -31,21 +10,21 @@ const App = () => {
   const [balls, setBalls] = useState(0);
   const [overs, setOvers] = useState(0);
 
-  const prevScoreRef = useRef();
-  const prevWicketsRef = useRef();
-  const prevBallsRef = useRef();
-  const prevOversRef = useRef();
+  const prevGameStateRef = useRef({ totalScore, wickets, balls, overs });
 
-  useEffect(() => {
-    prevScoreRef.current = totalScore;
-    prevWicketsRef.current = wickets;
-    prevBallsRef.current = balls;
-    prevOversRef.current = overs;
-  }, [totalScore, wickets, balls, overs]);
+  const updatePrevGameState = () => {
+    prevGameStateRef.current = { totalScore, wickets, balls, overs };
+  };
 
+  const handleUndo = () => {
+    const prevGameState = prevGameStateRef.current;
+    setTotalScore(prevGameState.totalScore);
+    setWickets(prevGameState.wickets);
+    setBalls(prevGameState.balls);
+    setOvers(prevGameState.overs);
+  };
 
   const handleRunButtonClick = (runs) => {
-    
       if (wickets<10 && balls < 6 && typeof runs === 'number') {
         setTotalScore(totalScore + runs);
         setBalls(balls + 1);
@@ -57,14 +36,14 @@ const App = () => {
         setOvers(0)
       }
       updateOvers();
-  
+      updatePrevGameState();
   };
-
 
   const handleNoBallButtonClick = (runs) => {
     if (wickets < 10 && balls < 6 && typeof runs === 'number') {
       setTotalScore(totalScore + runs);   
     }  
+    updatePrevGameState();
   };
 
   const updateOvers = () => {
@@ -79,9 +58,9 @@ const App = () => {
       setWickets(wickets + 1);
       setBalls(balls + 1);
       updateOvers();
+      updatePrevGameState();
     }
   };
-
 
   const handleWideBall = (type) => {
     if (wickets < 10 && balls < 6 && (type === 'wide') ) {
@@ -95,7 +74,6 @@ const App = () => {
       handleNoBallButtonClick(runs);
     }
   }
-
 
   const handleBye = (type) => {
     if (wickets < 10 && balls < 6 && (type === 'bye') ) {
@@ -111,18 +89,9 @@ const App = () => {
     }
   }
   
-
-  const handleUndo = () => {
-    setTotalScore(prevScoreRef.current);
-    setWickets(prevWicketsRef.current);
-    setBalls(prevBallsRef.current);
-    setOvers(prevOversRef.current);
-  }
   
-
-
   return (
-    <AppWrapper>
+    <Wrapper>
     <ScoreCard totalScore={totalScore} wickets={wickets} overs={overs} balls={balls} />
     <ScoreButtons>
       <Button label="0" onClick={() => handleRunButtonClick(0)}/>
@@ -144,14 +113,14 @@ const App = () => {
 
     <ScoreButtons>
       <Button label="Leg Bye" type = "legBye" onClick = {handleLegBye} />
-      <Button label="Wicket" onClick={handleWicketButtonClick}  />
+      <Button label="Wicket" onClick = {handleWicketButtonClick}  />
       <Button label="Undo" type = "undo" onClick = {handleUndo}/>
     </ScoreButtons>
       
     <ScoreButtons>
        <Button label="Reset" onClick={() => handleRunButtonClick('reset')} />
     </ScoreButtons>
-    </AppWrapper>
+    </Wrapper>
   );
 }
 
