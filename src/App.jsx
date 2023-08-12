@@ -70,8 +70,11 @@ const App = () => {
 
   const handleNoBall = (type,runs) => {
     if (wickets < 10 && balls < 6 && (type === 'noball') ) {
-      setTotalScore(totalScore + 1);
+      setTotalScore(totalScore + runs);
       handleNoBallButtonClick(runs);
+      
+      updatePrevGameState();
+
     }
   }
 
