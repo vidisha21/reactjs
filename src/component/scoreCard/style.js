@@ -10,7 +10,6 @@ const ScoreInfo = styled.div`
   img {
     border-radius: 2px;
     width : 40px;
-    
   }
   
 
