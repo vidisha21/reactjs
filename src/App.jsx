@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import ScoreCard from './component/scoreCard';
 import Button from './component/button';
 import { ScoreButtons, Wrapper } from './style';
-import swal from 'sweetalert2';
 
 
 
@@ -63,17 +62,18 @@ const App = () => {
     }
     updatePrevGameState();
   }
-  const handleNoBallButtonClick =(runs) =>{
-    if (wickets<10 && balls < 6 && typeof runs === 'number'){
-      setTotalScore(totalScore + runs);
-    }
-  }
+
 
   const handleNoBall = (type,runs) => {
     if (wickets < 10 && balls < 6 && (type === 'noball') ) {
       setTotalScore(totalScore + 1);
-      handleNoBallButtonClick(runs);
+    
+      updatePrevGameState();
+
+    
     }
+    
+    
   }
   const handleLegButtonClick = (runs) => {
     if (wickets<10 && balls < 6 && typeof runs === 'number') {
