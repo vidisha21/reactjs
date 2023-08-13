@@ -16,14 +16,7 @@ const App = () => {
     prevGameStateRef.current = { totalScore, wickets, balls, overs };
   };
 
-  const handleUndo = () => {
-    const prevGameState = prevGameStateRef.current;
-    setTotalScore(prevGameState.totalScore);
-    setWickets(prevGameState.wickets);
-    setBalls(prevGameState.balls);
-    setOvers(prevGameState.overs);
-  };
-
+  
   const handleRunButtonClick = (runs) => {
       if (wickets<10 && balls < 6 && typeof runs === 'number') {
         setTotalScore(totalScore + runs);
@@ -39,12 +32,6 @@ const App = () => {
       updatePrevGameState();
   };
 
-  const handleNoBallButtonClick = (runs) => {
-    if (wickets < 10 && balls < 6 && typeof runs === 'number') {
-      setTotalScore(totalScore + runs);   
-    }  
-    updatePrevGameState();
-  };
 
   const updateOvers = () => {
       if(balls===5){
@@ -66,30 +53,40 @@ const App = () => {
     if (wickets < 10 && balls < 6 && (type === 'wide') ) {
       setTotalScore(totalScore + 1);
     }
+    updatePrevGameState();
   }
 
   const handleNoBall = (type,runs) => {
     if (wickets < 10 && balls < 6 && (type === 'noball') ) {
       setTotalScore(totalScore + 1);
-      handleNoBallButtonClick(runs);
     }
+    updatePrevGameState();
   }
 
   const handleBye = (type) => {
     if (wickets < 10 && balls < 6 && (type === 'bye') ) {
       setTotalScore(totalScore + 1);
-      handleNoBallButtonClick();
+      handleRunButtonClick();
     }
   }
 
   const handleLegBye = (type,runs) => {
     if (wickets < 10 && balls < 6 && (type === 'legBye') ) {
       setTotalScore(totalScore + 1);
-      handleNoBallButtonClick(runs);
+      handleRunButtonClick(runs);
     }
   }
+
+  const handleUndo = () => {
+    const prevGameState = prevGameStateRef.current;
+    setTotalScore(prevGameState.totalScore);
+    setWickets(prevGameState.wickets);
+    setBalls(prevGameState.balls);
+    setOvers(prevGameState.overs);
+  };
+
   
-  
+
   return (
     <Wrapper>
     <ScoreCard totalScore={totalScore} wickets={wickets} overs={overs} balls={balls} />

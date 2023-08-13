@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.button`
+  
   margin: 5px;
   padding: 5px 10px;
   font-size: 16px;
