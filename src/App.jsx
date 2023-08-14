@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import ScoreCard from './component/scoreCard';
 import Button from './component/button';
 import { ScoreButtons, Wrapper } from './style';
+import Swal from 'sweetalert2';
 
 
 
@@ -33,12 +34,12 @@ const App = () => {
       updatePrevGameState();
   };
 
-  const handleNoBallButtonClick = (runs) => {
-    if (wickets < 10 && balls < 6 && typeof runs === 'number') {
-      setTotalScore(totalScore + runs);   
-    }  
-    updatePrevGameState();
-  };
+  // const handleNoBallButtonClick = (runs) => {
+  //   if (wickets < 10 && balls < 6 && typeof runs === 'number') {
+  //     setTotalScore(totalScore + runs);   
+  //   }  
+  //   updatePrevGameState();
+  // };
 
   const updateOvers = () => {
       if(balls===5){
@@ -66,11 +67,8 @@ const App = () => {
 
   const handleNoBall = (type) => {
     if (wickets < 10 && balls < 6 && (type === 'noball') ) {
-      setTotalScore(totalScore + 1);
-    
+      Swal.fire("enter runs scored")
       updatePrevGameState();
-
-    
     }
     handleNoBallButtonClick(runs);
   }
@@ -102,20 +100,20 @@ const App = () => {
     
   };
 
-  const handleBye = (type) => {
+  const handleBye = (type,runs) => {
     if (wickets < 10 && balls < 6 && (type === 'bye') ) {
-      swal.fire("enter runs scored");
-     
+      setTotalScore(totalScore + 1);
+      handleNoBallButtonClick();
     }
-    handleLegButtonClick();
+    handleLegButtonClick(runs);
   }
 
   const handleLegBye = (type,runs) => {
     if (wickets < 10 && balls < 6 && (type === 'legBye') ) {
-      setTotalScore(totalScore + 1);
-      handleNoBallButtonClick(runs);
+      Swal.fire("enter runs scored")
+      
     }
-    handleLegButtonClick();
+    handleLegButtonClick(runs);
   }
 
   const handleUndo = () => {
