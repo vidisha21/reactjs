@@ -68,25 +68,47 @@ const App = () => {
     if (wickets<10 && balls < 6 && typeof runs === 'number'){
       setTotalScore(totalScore + runs);
     }
+    
   }
 
-  const handleNoBall = (type,runs) => {
+  const handleNoBall = (type) => {
     if (wickets < 10 && balls < 6 && (type === 'noball') ) {
       swal.fire("enter runs scored");
     }
-    handleNoBallButtonClick(runs);
+    handleNoBallButtonClick();
   }
+
+  // const handleNoBall = () => {
+  //   if (wickets < 10 && balls < 6) {
+  //     swal.fire({
+  //       title: 'Enter runs scored',
+  //       input: 'number',
+  //       showCancelButton: true,
+  //       confirmButtonText: 'Submit',
+  //       preConfirm: (runs) => {
+  //         if (!isNaN(runs)) {
+  //           setTotalScore(totalScore + Number(runs)); // Add runs to the total score
+  //         } else {
+  //           swal.showValidationMessage('Please enter a valid number');
+  //         }
+  //       },
+  //     });
+  //   }
+  // };
+  
+
   const handleLegButtonClick = (runs) => {
-    if (wickets<10 && balls < 6 && typeof runs === 'number') {
+    if (wickets<10 && balls < 6 && typeof runs==='number' ) {
       setTotalScore(totalScore + runs);
-    
     }
+   
+    
   };
 
   const handleBye = (type) => {
     if (wickets < 10 && balls < 6 && (type === 'bye') ) {
       swal.fire("enter runs scored");
-     
+      
     }
     handleLegButtonClick();
   }
