@@ -4,8 +4,6 @@ import Button from './component/button';
 import { ScoreButtons, Wrapper } from './style';
 import Swal from 'sweetalert2';
 
-
-
 const App = () => {
   const [totalScore, setTotalScore] = useState(0);
   const [wickets, setWickets] = useState(0);
@@ -14,32 +12,31 @@ const App = () => {
 
   const prevGameStateRef = useRef({ totalScore, wickets, balls, overs });
 
+  const [last10Balls, setLast10Balls] = useState([]);
+
   const updatePrevGameState = () => {
     prevGameStateRef.current = { totalScore, wickets, balls, overs };
   };
 
-  
-  const handleRunButtonClick = (runs) => {
+  const handleRunButtonClick = (runs, type) => {
       if (wickets<10 && balls < 6 && typeof runs === 'number') {
         setTotalScore(totalScore + runs);
         setBalls(balls + 1);
+
+        if (type) {
+          updateLast10Balls(runs, type);
+        }
       }
       else if( runs === 'reset'){
         setTotalScore(0);
         setBalls(0);
         setWickets(0);
-        setOvers(0)
+        setOvers(0);
+        setLast10Balls([]);
       }
       updateOvers();
       updatePrevGameState();
   };
-
-  // const handleNoBallButtonClick = (runs) => {
-  //   if (wickets < 10 && balls < 6 && typeof runs === 'number') {
-  //     setTotalScore(totalScore + runs);   
-  //   }  
-  //   updatePrevGameState();
-  // };
 
   const updateOvers = () => {
       if(balls===5){
@@ -64,35 +61,82 @@ const App = () => {
     updatePrevGameState();
   }
 
+  const updateLast10Balls = (runs, type) => {
+    let label = runs;
+    if (type === 'wide') label = 'wd';
+    else if (type === 'noball') label = 'nb';
+    else if (type === 'bye') label = 'bye';
+    else if (type === 'legBye') label = 'lbye';
+    else if (type === 'wicket') label = 'w';
 
-  const handleNoBall = (type,runs) => {
-    if (wickets < 10 && balls < 6 && (type === 'noball') ) {
-      Swal.fire("enter runs scored")
-      updatePrevGameState();
+    const updatedLast10Balls = [...last10Balls, label];
+    if (updatedLast10Balls.length > 10) {
+      updatedLast10Balls.shift();
     }
-    
-    
-  }
-  const handleLegButtonClick = (runs) => {
-    if (wickets<10 && balls < 6 && typeof runs === 'number') {
-      setTotalScore(totalScore + runs);
-    
-    }
+    setLast10Balls(updatedLast10Balls);
   };
 
-  const handleBye = (type,runs) => {
-    if (wickets < 10 && balls < 6 && (type === 'bye') ) {
-      Swal.fire("enter runs scored")
+
+  const handleNoBall = () => {
+      if (wickets < 10 && balls < 6) {
+        Swal.fire({
+          title: 'Enter runs scored',
+          input: 'number',
+          showCancelButton: true,
+          confirmButtonText: 'Submit',
+          preConfirm: (runs) => {
+            if (!isNaN(runs)) {
+              setTotalScore(totalScore + Number(runs) + 1); 
+              
+            } else {
+              Swal.showValidationMessage('Please enter a valid number');
+            }
+            updatePrevGameState();
+          },
+        });
+      }
     }
-    handleLegButtonClick(runs);
+
+  const handleBye = () => {
+    if (wickets < 10 && balls < 6) {
+      Swal.fire({
+        title: 'Enter runs scored',
+        input: 'number',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        preConfirm: (runs) => {
+          if (!isNaN(runs)) {
+            setTotalScore(totalScore + Number(runs)); 
+            setBalls(balls + 1);
+            updateOvers();
+          } else {
+            Swal.showValidationMessage('Please enter a valid number');
+          }
+          updatePrevGameState();
+        },
+      });
+    }
   }
 
-  const handleLegBye = (type,runs) => {
-    if (wickets < 10 && balls < 6 && (type === 'legBye') ) {
-      Swal.fire("enter runs scored")
-      
+  const handleLegBye = () => {
+    if (wickets < 10 && balls < 6) {
+      Swal.fire({
+        title: 'Enter runs scored',
+        input: 'number',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        preConfirm: (runs) => {
+          if (!isNaN(runs)) {
+            setTotalScore(totalScore + Number(runs)); 
+            setBalls(balls + 1);
+            updateOvers();
+          } else {
+            Swal.showValidationMessage('Please enter a valid number');
+          }
+          updatePrevGameState();
+        },
+      });
     }
-    handleLegButtonClick(runs);
   }
 
   const handleUndo = () => {
@@ -103,11 +147,20 @@ const App = () => {
     setOvers(prevGameState.overs);
   };
 
-  
-
   return (
     <Wrapper>
     <ScoreCard totalScore={totalScore} wickets={wickets} overs={overs} balls={balls} />
+
+    <last10Balls>
+      <h2>
+        {last10Balls.map((label, index) => (
+          <span key={index} style={{ margin: '10px' }}>
+            {label}
+          </span>
+        ))}
+      </h2>
+    </last10Balls>
+
     <ScoreButtons>
       <Button label="0" onClick={() => handleRunButtonClick(0)}/>
       <Button label="1" onClick={() => handleRunButtonClick(1)}/>
@@ -128,7 +181,7 @@ const App = () => {
 
     <ScoreButtons>
       <Button label="Leg Bye" type = "legBye" onClick = {handleLegBye} />
-      <Button label="Wicket" onClick = {handleWicketButtonClick}  />
+      <Button label="Wicket" type = "wicket"onClick = {handleWicketButtonClick}  />
       <Button label="Undo" type = "undo" onClick = {handleUndo}/>
     </ScoreButtons>
       

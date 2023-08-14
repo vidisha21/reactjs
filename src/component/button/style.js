@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.button`
-  
-  margin: 5px;
+  text-align: center;
+  margin: 15px;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 40px;
   background-color: teal;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  
+  
 
   &:hover {
     background-color: grey;
