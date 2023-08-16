@@ -3,7 +3,7 @@ import {  Wrapper } from './style';
 
 const Button = ({ label, type, onClick }) => {
   return (
-    <Wrapper onClick={() => onClick(type)}>{label}</Wrapper>
+    <div onClick={() => onClick(type)}>{label}</div>
   );
 };
 

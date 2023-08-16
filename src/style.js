@@ -1,23 +1,48 @@
-import { styled } from "styled-components";
 
-const Wrapper = styled.div`
+import styled from 'styled-components';
+
+export const Wrapper = styled.div`
+    
+max-width: 1068px;
+margin: auto;
+width: 100%;
+padding-bottom: 2%;
 display: flex;
 flex-direction: column;
-width: 30%;
-height:80%;
-margin: auto;
-background : url('https://img.freepik.com/premium-photo/soccer-stadium-evening-arena-with-crowd-fans-d-illustration_336913-373.jpg?size=626&ext=jpg&ga=GA1.1.1522961941.1691787232&semt=ais');
-background-repeat: no-repeat;
+align-items: center; 
+justify-content: center; 
 `;
 
-const ScoreButtons = styled.div`{
-    display: flex;
-    justify-content: center;
-    height: 80px;
-    Button{
-      width: 100px;
-    }
-  }
-  `;
+export const ScoreButton = styled.button`
+  display: inline-block;
+  width: 65px; 
+  height: 47px; 
+  margin: 4px; 
+  background-color: teal;
+  color: white;
+  border: solid 2px grey;
+  border-radius: 3px;
+  cursor: pointer;
 
-export { Wrapper ,ScoreButtons };
+  &:hover {
+    background-color: grey;
+  }
+`;
+
+export const ResetButton = styled.button`
+  display: block;
+  margin: 10px auto; 
+  padding: 10px 20px;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: grey;
+  }
+`;
+// export const Whole = styled.div`
+// background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOK6MKUnKzFRD7d9WBgKv9OT8YIBNsKHsutPAdXYHWWg&s' style={{width:'500px'}} );
+//   background-repeat: no-repeat;`;
