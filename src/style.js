@@ -1,26 +1,49 @@
 import { styled } from "styled-components";
 
+
 const Wrapper = styled.div`
-display: flex;
-flex-direction: column;
-justifyContent : center;
- alignItems : center;
-width: 100%;
-height: 100%;
-background : url('https://img.freepik.com/premium-photo/soccer-stadium-evening-arena-with-crowd-fans-d-illustration_336913-373.jpg?size=626&ext=jpg&ga=GA1.1.1522961941.1691787232&semt=ais');
-background-repeat: no-repeat;
+display  : flex;
+flex-direction : column;
+justifyContent : space-between;
+alignItems : center;
+background-color:tomato;
 `;
 
 const ScoreButtons = styled.div`{
-    display: flex;
-    justify-content: space-between;
-    align-item: center;
+    display : flex;
+    justify-content : space-between;
+    align-item : center; 
+  }
+  `;
+
+  const ScoreButtons1 = styled.div`{
+    
+    
+    
+    
+  }
+  `;
+
+  const ScoreButtons2 = styled.div`{
+    
+      
+  }
+  `;
+
+  const ScoreButtons3 = styled.div`{
+    
       
   }
   `;
 
 const last10Balls = styled.div`{
-  color: red;
+  color : red;
 }`;
 
-export { Wrapper ,ScoreButtons ,last10Balls};
+
+
+export { Wrapper , ScoreButtons, ScoreButtons1, ScoreButtons2, ScoreButtons3 ,last10Balls};
+
+
+
+
