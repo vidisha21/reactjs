@@ -1,49 +1,48 @@
-import { styled } from "styled-components";
+import styled from 'styled-components';
 
-
-const Wrapper = styled.div`
-display  : flex;
-flex-direction : column;
-justifyContent : space-between;
-alignItems : center;
-background-color:tomato;
+export const Wrapper = styled.div`
+    
+max-width: 1068px;
+margin: auto;
+width: 100%;
+padding-bottom: 2%;
+display: flex;
+flex-direction: column;
+align-items: center; 
+justify-content: center; 
 `;
 
-const ScoreButtons = styled.div`{
-    display : flex;
-    justify-content : space-between;
-    align-item : center; 
+export const ScoreButton = styled.button`
+  display: inline-block;
+  width: 65px; 
+  height: 47px; 
+  margin: 4px; 
+  background-color: teal;
+  color: white;
+  // border: solid 2px grey;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: grey;
   }
-  `;
+`;
 
-  const ScoreButtons1 = styled.div`{
-    
-    
-    
-    
+export const ResetButton = styled.button`
+  display: block;
+  margin: 10px auto; 
+  padding: 10px 20px;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: grey;
   }
-  `;
-
-  const ScoreButtons2 = styled.div`{
-    
-      
-  }
-  `;
-
-  const ScoreButtons3 = styled.div`{
-    
-      
-  }
-  `;
-
-const last10Balls = styled.div`{
-  color : red;
-}`;
-
-
-
-export { Wrapper , ScoreButtons, ScoreButtons1, ScoreButtons2, ScoreButtons3 ,last10Balls};
-
-
-
-
+`;
+// export const Whole = styled.div`
+// background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOK6MKUnKzFRD7d9WBgKv9OT8YIBNsKHsutPAdXYHWWg&s' style={{width:'500px'}} );
+//   background-repeat: no-repeat;`;

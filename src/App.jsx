@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import ScoreCard from './component/scoreCard';
-import Button from './component/button';
-import { ScoreButtons, ScoreButtons1 , ScoreButtons2, ScoreButtons3, Wrapper } from './style';
+import { Wrapper, ScoreButton,ResetButton } from './style';
 import Swal from 'sweetalert2';
+
 
 const App = () => {
   const [totalScore, setTotalScore] = useState(0);
@@ -23,9 +23,9 @@ const App = () => {
         setBalls(balls + 1);
         
       if (type) {
-         updateLast10Balls(type); // Update last 10 balls only for types other than runs
+         updateLast10Balls(type);
       } else {
-      updateLast10Balls(runs); // Update last 10 balls for runs
+      updateLast10Balls(runs); 
     }
       }
       else if( runs === 'reset'){
@@ -129,10 +129,10 @@ const App = () => {
   };
 
   return (
-    <Wrapper>
+    <div>
     <ScoreCard totalScore={totalScore} wickets={wickets} overs={overs} balls={balls} />
-
-    <last10Balls>
+      <Wrapper>
+        <last10Balls>
       <h2>
         {last10Balls.map((label, index) => (
           <span key={index} style={{ margin: '10px' }}>
@@ -142,31 +142,37 @@ const App = () => {
       </h2>
     </last10Balls>
 
-    <ScoreButtons>
-      <Button label="Wd" type = "wide" onClick={() => handleWideBall('wide')}/>
-      <Button label="Nb" type = "noball"  onClick={() => handleNoBall('noball')} />
-      <Button label="W" type = "wicket"  onClick={() => handleWicketButtonClick('wicket')} /> 
-      <Button label="5" onClick={() => handleRunButtonClick(5)}/>
-    </ScoreButtons>
+    <div>
+    <ScoreButton label="0" onClick={() => handleRunButtonClick(0)} >0</ScoreButton>
+          <ScoreButton label="1" onClick={() => handleRunButtonClick(1)} >1</ScoreButton>
+          <ScoreButton label="2" onClick={() => handleRunButtonClick(2)} >2</ScoreButton>
+          <ScoreButton label="3" onClick={() => handleRunButtonClick(3)} >3</ScoreButton>
 
-    <ScoreButtons1>
-      <Button label="0" onClick={() => handleRunButtonClick(0)}/>
-      <Button label="1" onClick={() => handleRunButtonClick(1)}/>
-      <Button label="2" onClick={() => handleRunButtonClick(2)}/>
-      <Button label="bye" type = "bye" onClick={() => handleBye('bye')}/>  
-    </ScoreButtons1>
+      </div>
 
-    <ScoreButtons2>
-      <Button label="3" onClick={() => handleRunButtonClick(3)}/>
-      <Button label="4" onClick={() => handleRunButtonClick(4)}/>
-      <Button label="6" onClick={() => handleRunButtonClick(6)}/>
-      <Button label="Undo" type = "undo" onClick={handleUndo}/>
-    </ScoreButtons2>
+      <div>
+    
+    <ScoreButton label="4" onClick={() => handleRunButtonClick(4)}>4</ScoreButton>
+    <ScoreButton label="6" onClick={() => handleRunButtonClick(6)}>6</ScoreButton>
+    <ScoreButton label="No Ball" type = "noball"  onClick={() => handleNoBall('noball')} >No Ball</ScoreButton>
+    <ScoreButton label="Wide" type = "wide" onClick={() => handleWideBall('wide')}> Wide</ScoreButton>
+    </div>
+
+    <div>
+      
+    <ScoreButton label="Wicket" type = "wicket"  onClick={() => handleWicketButtonClick('wicket')} >Wicket</ScoreButton>
+    <ScoreButton label="bye" type = "bye" onClick={() => handleBye('bye')}>Bye</ScoreButton>
+    <ScoreButton label="legbye" type = "bye" onClick={() => handleBye('bye')}>LegBye</ScoreButton>  
+    <ScoreButton label="Undo" type = "undo" onClick={handleUndo}>Undo</ScoreButton>
+    </div>
    
-    <ScoreButtons3>
-       <Button label="Reset" onClick={() => handleRunButtonClick('reset')} />
-    </ScoreButtons3>
-    </Wrapper>
+    <div>
+    
+       <ResetButton label="Reset" onClick={() => handleRunButtonClick('reset')} >Reset</ResetButton>
+       </div>
+      </Wrapper>
+    
+    </div>
   );
 }
 
