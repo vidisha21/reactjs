@@ -32,20 +32,21 @@ export const ScoreButton = styled.button`
 export const Background = styled.div`
 border : solid 4px black;`
 
-// export const ResetButton = styled.button`
-//   display: block;
-//   margin: 10px auto; 
-//   padding: 10px 20px;
-//   background-color: teal;
-//   color: white;
-//   border: none;
-//   border-radius: 3px;
-//   cursor: pointer;
+export const ResetButton = styled.button`
+  display: block;
+  margin: 10px auto; 
+  padding: 10px 20px;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 
-//   &:hover {
-//     background-color: grey;
-//   }
-// `;
+  &:hover {
+    background-color: grey;
+  }
+`;
+
 // export const Whole = styled.div`
 // background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOK6MKUnKzFRD7d9WBgKv9OT8YIBNsKHsutPAdXYHWWg&s' style={{width:'500px'}} );
 //   background-repeat: no-repeat;`;

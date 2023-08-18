@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  text-align: center;
-  padding: 10px;
-  width : 100%;
-  // background : grey;
+  // text-align: center;
+  height : 100%;
+  color : black;
+   background : white;
   
 `;
 
 const ScoreInfo = styled.div`
-  margin-bottom: 5px;
-  padding-bottom : 100px;
+  //  margin-top: 80px;
+   fontsize : 60px;
+    padding-top : 60px;
+  padding-bottom : 300px;
   img {
     border-radius: 2px;
-    width : 40px;
+    width : 45px;
   
   }
 `;

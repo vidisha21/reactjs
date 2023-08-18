@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
 import ScoreCard from './component/scoreCard';
-import { Wrapper, ScoreButton,ResetButton } from './style';
+import { Wrapper, ScoreButton, Background } from './style';
 import Swal from 'sweetalert2';
+import './App.css'
+import Header from './component/header';
 
 
 const App = () => {
@@ -129,51 +131,54 @@ const App = () => {
   };
 
   return (
-    <div>
-    <ScoreCard totalScore={totalScore} wickets={wickets} overs={overs} balls={balls} />
-      <Wrapper>
-        <last10Balls>
-      <h2>
-        {last10Balls.map((label, index) => (
-          <span key={index} style={{ margin: '10px' }}>
-            {label}
-          </span>
-        ))}
-      </h2>
-    </last10Balls>
 
-    <div>
-    <ScoreButton label="0" onClick={() => handleRunButtonClick(0)} >0</ScoreButton>
-          <ScoreButton label="1" onClick={() => handleRunButtonClick(1)} >1</ScoreButton>
-          <ScoreButton label="2" onClick={() => handleRunButtonClick(2)} >2</ScoreButton>
-          <ScoreButton label="3" onClick={() => handleRunButtonClick(3)} >3</ScoreButton>
+    <Background>
+<Header />
 
-      </div>
+                    <div>
+                    <ScoreCard totalScore={totalScore} wickets={wickets} overs={overs} balls={balls} />
+                    </div>
+                      <Wrapper>
+                        {/* <last10Balls>
+                      <h2>
+                         {last10Balls.map((label, index) => (
+                           <span key={index} style={{ margin: '10px' }}>
+                             {label}
+                          </span>
+                         ))}
+                      </h2>
+                    </last10Balls> */}
 
-      <div>
+                    <div style={{display : 'flex'}}>
+                          <ScoreButton label="0" onClick={() => handleRunButtonClick(0)}style={{fontSize : '50px'}} >0</ScoreButton>
+                          <ScoreButton label="1" onClick={() => handleRunButtonClick(1)} style={{fontSize : '50px'}}>1</ScoreButton>
+                          <ScoreButton label="2" onClick={() => handleRunButtonClick(2)} style={{fontSize : '50px'}}>2</ScoreButton>
+                          <ScoreButton label="Undo" type = "undo" onClick={handleUndo} style={{color : 'blue', fontSize : '30px'}} >Undo</ScoreButton>
+                    </div>
+
+                    <div style={{display : 'flex'}}>
+                        <ScoreButton label="3" onClick={() => handleRunButtonClick(3)} style={{fontSize : '50px'}} >3</ScoreButton>
+                        <ScoreButton label="4" onClick={() => handleRunButtonClick(4)} style={{fontSize : '50px'}}>4</ScoreButton>
+                        <ScoreButton label="6" onClick={() => handleRunButtonClick(6)} style={{fontSize : '50px'}}>6</ScoreButton>
+                        <ScoreButton label="No Ball" type = "noball"  onClick={() => handleNoBall('noball')} >No Ball</ScoreButton>
+                    </div>
+
+                    <div style={{display : 'flex'}}>
+                          <ScoreButton label="Wide" type = "wide" onClick={() => handleWideBall('wide')}> Wide</ScoreButton> 
+                          <ScoreButton label="Wicket" type = "wicket"  onClick={() => handleWicketButtonClick('wicket')} >Wicket</ScoreButton>
+                          <ScoreButton label="bye" type = "bye" onClick={() => handleBye('bye')}>Bye</ScoreButton>
+                          <ScoreButton label="legbye" type = "bye" onClick={() => handleBye('bye')}>LegBye</ScoreButton>  
+                    </div>
+                  
+                    {/* <div>
+                      <Button label="Reset" onClick={() => handleRunButtonClick('reset')} >Reset</Button>
+                    
+                      </div> */}
+                      </Wrapper>
     
-    <ScoreButton label="4" onClick={() => handleRunButtonClick(4)}>4</ScoreButton>
-    <ScoreButton label="6" onClick={() => handleRunButtonClick(6)}>6</ScoreButton>
-    <ScoreButton label="No Ball" type = "noball"  onClick={() => handleNoBall('noball')} >No Ball</ScoreButton>
-    <ScoreButton label="Wide" type = "wide" onClick={() => handleWideBall('wide')}> Wide</ScoreButton>
-    </div>
-
-    <div>
-      
-    <ScoreButton label="Wicket" type = "wicket"  onClick={() => handleWicketButtonClick('wicket')} >Wicket</ScoreButton>
-    <ScoreButton label="bye" type = "bye" onClick={() => handleBye('bye')}>Bye</ScoreButton>
-    <ScoreButton label="legbye" type = "bye" onClick={() => handleBye('bye')}>LegBye</ScoreButton>  
-    <ScoreButton label="Undo" type = "undo" onClick={handleUndo}>Undo</ScoreButton>
-    </div>
-   
-    <div>
-    
-       <ResetButton label="Reset" onClick={() => handleRunButtonClick('reset')} >Reset</ResetButton>
-       </div>
-      </Wrapper>
-    
-    </div>
+    </Background>
   );
+ 
 }
 
 export default App;
